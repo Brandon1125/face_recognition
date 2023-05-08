@@ -1,0 +1,237 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expresion
+Rule 1     expresion -> termino
+Rule 2     expresion -> termino SUMA expresion
+Rule 3     expresion -> termino RESTA expresion
+Rule 4     termino -> factor
+Rule 5     termino -> factor MULTIPLICACION termino
+Rule 6     termino -> factor DIVISION termino
+Rule 7     factor -> NUMERO
+Rule 8     factor -> PARENTESIS_IZQ expresion PARENTESIS_DER
+
+Terminals, with rules where they appear
+
+DIVISION             : 6
+MULTIPLICACION       : 5
+NUMERO               : 7
+PARENTESIS_DER       : 8
+PARENTESIS_IZQ       : 8
+RESTA                : 3
+SUMA                 : 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+expresion            : 2 3 8 0
+factor               : 4 5 6
+termino              : 1 2 3 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expresion
+    (1) expresion -> . termino
+    (2) expresion -> . termino SUMA expresion
+    (3) expresion -> . termino RESTA expresion
+    (4) termino -> . factor
+    (5) termino -> . factor MULTIPLICACION termino
+    (6) termino -> . factor DIVISION termino
+    (7) factor -> . NUMERO
+    (8) factor -> . PARENTESIS_IZQ expresion PARENTESIS_DER
+
+    NUMERO          shift and go to state 4
+    PARENTESIS_IZQ  shift and go to state 5
+
+    expresion                      shift and go to state 1
+    termino                        shift and go to state 2
+    factor                         shift and go to state 3
+
+state 1
+
+    (0) S' -> expresion .
+
+
+
+state 2
+
+    (1) expresion -> termino .
+    (2) expresion -> termino . SUMA expresion
+    (3) expresion -> termino . RESTA expresion
+
+    $end            reduce using rule 1 (expresion -> termino .)
+    PARENTESIS_DER  reduce using rule 1 (expresion -> termino .)
+    SUMA            shift and go to state 6
+    RESTA           shift and go to state 7
+
+
+state 3
+
+    (4) termino -> factor .
+    (5) termino -> factor . MULTIPLICACION termino
+    (6) termino -> factor . DIVISION termino
+
+    SUMA            reduce using rule 4 (termino -> factor .)
+    RESTA           reduce using rule 4 (termino -> factor .)
+    $end            reduce using rule 4 (termino -> factor .)
+    PARENTESIS_DER  reduce using rule 4 (termino -> factor .)
+    MULTIPLICACION  shift and go to state 8
+    DIVISION        shift and go to state 9
+
+
+state 4
+
+    (7) factor -> NUMERO .
+
+    MULTIPLICACION  reduce using rule 7 (factor -> NUMERO .)
+    DIVISION        reduce using rule 7 (factor -> NUMERO .)
+    SUMA            reduce using rule 7 (factor -> NUMERO .)
+    RESTA           reduce using rule 7 (factor -> NUMERO .)
+    $end            reduce using rule 7 (factor -> NUMERO .)
+    PARENTESIS_DER  reduce using rule 7 (factor -> NUMERO .)
+
+
+state 5
+
+    (8) factor -> PARENTESIS_IZQ . expresion PARENTESIS_DER
+    (1) expresion -> . termino
+    (2) expresion -> . termino SUMA expresion
+    (3) expresion -> . termino RESTA expresion
+    (4) termino -> . factor
+    (5) termino -> . factor MULTIPLICACION termino
+    (6) termino -> . factor DIVISION termino
+    (7) factor -> . NUMERO
+    (8) factor -> . PARENTESIS_IZQ expresion PARENTESIS_DER
+
+    NUMERO          shift and go to state 4
+    PARENTESIS_IZQ  shift and go to state 5
+
+    expresion                      shift and go to state 10
+    termino                        shift and go to state 2
+    factor                         shift and go to state 3
+
+state 6
+
+    (2) expresion -> termino SUMA . expresion
+    (1) expresion -> . termino
+    (2) expresion -> . termino SUMA expresion
+    (3) expresion -> . termino RESTA expresion
+    (4) termino -> . factor
+    (5) termino -> . factor MULTIPLICACION termino
+    (6) termino -> . factor DIVISION termino
+    (7) factor -> . NUMERO
+    (8) factor -> . PARENTESIS_IZQ expresion PARENTESIS_DER
+
+    NUMERO          shift and go to state 4
+    PARENTESIS_IZQ  shift and go to state 5
+
+    termino                        shift and go to state 2
+    expresion                      shift and go to state 11
+    factor                         shift and go to state 3
+
+state 7
+
+    (3) expresion -> termino RESTA . expresion
+    (1) expresion -> . termino
+    (2) expresion -> . termino SUMA expresion
+    (3) expresion -> . termino RESTA expresion
+    (4) termino -> . factor
+    (5) termino -> . factor MULTIPLICACION termino
+    (6) termino -> . factor DIVISION termino
+    (7) factor -> . NUMERO
+    (8) factor -> . PARENTESIS_IZQ expresion PARENTESIS_DER
+
+    NUMERO          shift and go to state 4
+    PARENTESIS_IZQ  shift and go to state 5
+
+    termino                        shift and go to state 2
+    expresion                      shift and go to state 12
+    factor                         shift and go to state 3
+
+state 8
+
+    (5) termino -> factor MULTIPLICACION . termino
+    (4) termino -> . factor
+    (5) termino -> . factor MULTIPLICACION termino
+    (6) termino -> . factor DIVISION termino
+    (7) factor -> . NUMERO
+    (8) factor -> . PARENTESIS_IZQ expresion PARENTESIS_DER
+
+    NUMERO          shift and go to state 4
+    PARENTESIS_IZQ  shift and go to state 5
+
+    factor                         shift and go to state 3
+    termino                        shift and go to state 13
+
+state 9
+
+    (6) termino -> factor DIVISION . termino
+    (4) termino -> . factor
+    (5) termino -> . factor MULTIPLICACION termino
+    (6) termino -> . factor DIVISION termino
+    (7) factor -> . NUMERO
+    (8) factor -> . PARENTESIS_IZQ expresion PARENTESIS_DER
+
+    NUMERO          shift and go to state 4
+    PARENTESIS_IZQ  shift and go to state 5
+
+    factor                         shift and go to state 3
+    termino                        shift and go to state 14
+
+state 10
+
+    (8) factor -> PARENTESIS_IZQ expresion . PARENTESIS_DER
+
+    PARENTESIS_DER  shift and go to state 15
+
+
+state 11
+
+    (2) expresion -> termino SUMA expresion .
+
+    $end            reduce using rule 2 (expresion -> termino SUMA expresion .)
+    PARENTESIS_DER  reduce using rule 2 (expresion -> termino SUMA expresion .)
+
+
+state 12
+
+    (3) expresion -> termino RESTA expresion .
+
+    $end            reduce using rule 3 (expresion -> termino RESTA expresion .)
+    PARENTESIS_DER  reduce using rule 3 (expresion -> termino RESTA expresion .)
+
+
+state 13
+
+    (5) termino -> factor MULTIPLICACION termino .
+
+    SUMA            reduce using rule 5 (termino -> factor MULTIPLICACION termino .)
+    RESTA           reduce using rule 5 (termino -> factor MULTIPLICACION termino .)
+    $end            reduce using rule 5 (termino -> factor MULTIPLICACION termino .)
+    PARENTESIS_DER  reduce using rule 5 (termino -> factor MULTIPLICACION termino .)
+
+
+state 14
+
+    (6) termino -> factor DIVISION termino .
+
+    SUMA            reduce using rule 6 (termino -> factor DIVISION termino .)
+    RESTA           reduce using rule 6 (termino -> factor DIVISION termino .)
+    $end            reduce using rule 6 (termino -> factor DIVISION termino .)
+    PARENTESIS_DER  reduce using rule 6 (termino -> factor DIVISION termino .)
+
+
+state 15
+
+    (8) factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .
+
+    MULTIPLICACION  reduce using rule 8 (factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .)
+    DIVISION        reduce using rule 8 (factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .)
+    SUMA            reduce using rule 8 (factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .)
+    RESTA           reduce using rule 8 (factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .)
+    $end            reduce using rule 8 (factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .)
+    PARENTESIS_DER  reduce using rule 8 (factor -> PARENTESIS_IZQ expresion PARENTESIS_DER .)
+
